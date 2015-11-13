@@ -11,6 +11,15 @@ let TodoService = function($http, PARSE) {
       });
   };
 
+   this.getTodo = function (objectId) {     
+      return $http({
+        method: 'GET',
+        url: url + '/' + objectId,
+        headers: PARSE.CONFIG.headers,
+        cache: true
+      });
+  };
+
   let Todos = function (obj) {
     this.title = obj.title;
     this.description = obj.description;
@@ -20,6 +29,12 @@ let TodoService = function($http, PARSE) {
     let t = new Todos(obj);
     return $http.post(url, t, PARSE.CONFIG);
   };
+
+    this.editTodo = function (obj) {
+    return $http.put(url + '/' + obj.objectId, obj, PARSE.CONFIG);
+  };
+
+  
 
 };
 TodoService.$inject = ['$http', 'PARSE'];

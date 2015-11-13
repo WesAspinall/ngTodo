@@ -16,8 +16,17 @@ let config = function($stateProvider, $urlRouterProvider) {
       url: '/add',
       controller: 'AddController',
       templateUrl: 'templates/add.tpl.html'
-    });
-
+    })
+    .state('root.edit', {
+      url: '/edit/:objectId',
+      controller: 'EditController',
+      templateUrl: 'templates/edit.tpl.html'
+    })
+    .state('root.single', {
+      url: '/single/:objectId',
+      controller: 'SingleTodoController',
+      templateUrl: 'templates/singleTodo.tpl.html'
+    })
 };
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];

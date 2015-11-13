@@ -2,5 +2,11 @@
 
 
 <div ng-repeat="pizza in todos">
-  <img src="{{pizza.pic}}"/>
+  <ul>
+
+  <li><a href="#/single/{{pizza.objectId}}">
+  <img src="{{pizza.pic}}"</li>
+
+  <li>{{pizza.name}}</li></a>
+  </ul>
 </div>

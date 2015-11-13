@@ -1,0 +1,14 @@
+<div>edit</div>
+  <ul>
+<li><img src="{{singleTodo.pic}}"></li>
+
+  <li>{{singleTodo}}</li>
+  </ul>
+</div>
+
+<form ng-submit="editTodo(singleTodo)">
+  <input ng-model="singleTodo.pic" placeholder="{{singleTodo.pic}}">
+  <input ng-model="singleTodo.bio">
+  <input ng-model="singleTodo.name">
+  <button></button>
+<form>

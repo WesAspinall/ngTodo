@@ -19,6 +19,14 @@ var config = function config($stateProvider, $urlRouterProvider) {
     url: '/add',
     controller: 'AddController',
     templateUrl: 'templates/add.tpl.html'
+  }).state('root.edit', {
+    url: '/edit/:objectId',
+    controller: 'EditController',
+    templateUrl: 'templates/edit.tpl.html'
+  }).state('root.single', {
+    url: '/single/:objectId',
+    controller: 'SingleTodoController',
+    templateUrl: 'templates/singleTodo.tpl.html'
   });
 };
 
@@ -53,6 +61,28 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+var EditController = function EditController($scope, $stateParams, TodoService) {
+
+  TodoService.getTodos($stateParams.whiskeyId).then(function (res) {
+    $scope.singleTodo = res.data;
+  });
+
+  $scope.editTodo = function (obj) {
+    TodoService.editTodo(obj).then(function (res) {
+      console.log(res);
+    });
+  };
+};
+EditController.$inject = ['$scope', '$stateParams', 'TodoService'];
+exports['default'] = EditController;
+module.exports = exports['default'];
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 var ListController = function ListController($scope, TodoService) {
 
   TodoService.getTodos().then(function (res) {
@@ -65,7 +95,23 @@ ListController.$inject = ['$scope', 'TodoService'];
 exports['default'] = ListController;
 module.exports = exports['default'];
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var SingleTodoController = function SingleTodoController($scope, $stateParams, TodoService) {
+
+  TodoService.getTodo($stateParams.objectId).then(function (res) {
+    $scope.singleTodo = res.data;
+  });
+};
+SingleTodoController.$inject = ['$scope', '$stateParams', 'TodoService'];
+exports['default'] = SingleTodoController;
+module.exports = exports['default'];
+
+},{}],6:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -88,6 +134,14 @@ var _controllersAddController = require('./controllers/add.controller');
 
 var _controllersAddController2 = _interopRequireDefault(_controllersAddController);
 
+var _controllersEditController = require('./controllers/edit.controller');
+
+var _controllersEditController2 = _interopRequireDefault(_controllersEditController);
+
+var _controllersSingleTodoController = require('./controllers/singleTodo.controller');
+
+var _controllersSingleTodoController2 = _interopRequireDefault(_controllersSingleTodoController);
+
 var _servicesTodoServiceJs = require('./services/todo.service.js');
 
 var _servicesTodoServiceJs2 = _interopRequireDefault(_servicesTodoServiceJs);
@@ -100,9 +154,9 @@ _angular2['default'].module('app', ['ui.router']).constant('PARSE', {
       'X-Parse-REST-API-Key': 'VkrnmdMXdr6se14fXKEHuxpiPVjYaWOYGEXjmKjU'
     }
   }
-}).config(_config2['default']).controller('ListController', _controllersListController2['default']).controller('AddController', _controllersAddController2['default']).service('TodoService', _servicesTodoServiceJs2['default']);
+}).config(_config2['default']).controller('ListController', _controllersListController2['default']).controller('AddController', _controllersAddController2['default']).controller('EditController', _controllersEditController2['default']).controller('SingleTodoController', _controllersSingleTodoController2['default']).service('TodoService', _servicesTodoServiceJs2['default']);
 
-},{"./config":1,"./controllers/add.controller":2,"./controllers/list.controller":3,"./services/todo.service.js":5,"angular":8,"angular-ui-router":6}],5:[function(require,module,exports){
+},{"./config":1,"./controllers/add.controller":2,"./controllers/edit.controller":3,"./controllers/list.controller":4,"./controllers/singleTodo.controller":5,"./services/todo.service.js":7,"angular":10,"angular-ui-router":8}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -120,6 +174,15 @@ var TodoService = function TodoService($http, PARSE) {
     });
   };
 
+  this.getTodo = function (objectId) {
+    return $http({
+      method: 'GET',
+      url: url + '/' + objectId,
+      headers: PARSE.CONFIG.headers,
+      cache: true
+    });
+  };
+
   var Todos = function Todos(obj) {
     this.title = obj.title;
     this.description = obj.description;
@@ -129,13 +192,17 @@ var TodoService = function TodoService($http, PARSE) {
     var t = new Todos(obj);
     return $http.post(url, t, PARSE.CONFIG);
   };
+
+  this.editTodo = function (obj) {
+    return $http.put(url + '/' + obj.objectId, obj, PARSE.CONFIG);
+  };
 };
 TodoService.$inject = ['$http', 'PARSE'];
 
 exports['default'] = TodoService;
 module.exports = exports['default'];
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4506,7 +4573,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33411,11 +33478,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":7}]},{},[4])
+},{"./angular":9}]},{},[6])
 
 
 //# sourceMappingURL=main.js.map
