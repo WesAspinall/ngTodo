@@ -9,8 +9,6 @@ Click on the profile image to go to a details view page.
 Click Edit to edit the rapper and delete to delete and go back to the home page.
 
 
-## Assets Installed By Default
-
 ## Assets Setup and ready for use
 
 - [Normalize CSS](https://necolas.github.io/normalize.css/)
