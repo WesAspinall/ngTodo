@@ -11,6 +11,11 @@ let config = function($stateProvider, $urlRouterProvider) {
       url: '/',
       controller: 'ListController',
       templateUrl: 'templates/list.tpl.html'
+    })
+    .state('root.add', {
+      url: '/add',
+      controller: 'AddController',
+      templateUrl: 'templates/add.tpl.html'
     });
 
 };

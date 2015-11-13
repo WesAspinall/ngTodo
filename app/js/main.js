@@ -15,6 +15,10 @@ var config = function config($stateProvider, $urlRouterProvider) {
     url: '/',
     controller: 'ListController',
     templateUrl: 'templates/list.tpl.html'
+  }).state('root.add', {
+    url: '/add',
+    controller: 'AddController',
+    templateUrl: 'templates/add.tpl.html'
   });
 };
 
@@ -24,6 +28,26 @@ exports['default'] = config;
 module.exports = exports['default'];
 
 },{}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var AddController = function AddController($scope, TodoService) {
+
+  $scope.addTodo = function (obj) {
+    TodoService.addTodo(obj).then(function (res) {
+      $scope.todo = {};
+    });
+  };
+};
+
+AddController.$inject = ['$scope', 'TodoService'];
+
+exports['default'] = AddController;
+module.exports = exports['default'];
+
+},{}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -41,7 +65,7 @@ ListController.$inject = ['$scope', 'TodoService'];
 exports['default'] = ListController;
 module.exports = exports['default'];
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -60,6 +84,10 @@ var _controllersListController = require('./controllers/list.controller');
 
 var _controllersListController2 = _interopRequireDefault(_controllersListController);
 
+var _controllersAddController = require('./controllers/add.controller');
+
+var _controllersAddController2 = _interopRequireDefault(_controllersAddController);
+
 var _servicesTodoServiceJs = require('./services/todo.service.js');
 
 var _servicesTodoServiceJs2 = _interopRequireDefault(_servicesTodoServiceJs);
@@ -72,9 +100,9 @@ _angular2['default'].module('app', ['ui.router']).constant('PARSE', {
       'X-Parse-REST-API-Key': 'VkrnmdMXdr6se14fXKEHuxpiPVjYaWOYGEXjmKjU'
     }
   }
-}).config(_config2['default']).controller('ListController', _controllersListController2['default']).service('TodoService', _servicesTodoServiceJs2['default']);
+}).config(_config2['default']).controller('ListController', _controllersListController2['default']).controller('AddController', _controllersAddController2['default']).service('TodoService', _servicesTodoServiceJs2['default']);
 
-},{"./config":1,"./controllers/list.controller":2,"./services/todo.service.js":4,"angular":7,"angular-ui-router":5}],4:[function(require,module,exports){
+},{"./config":1,"./controllers/add.controller":2,"./controllers/list.controller":3,"./services/todo.service.js":5,"angular":8,"angular-ui-router":6}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -91,13 +119,23 @@ var TodoService = function TodoService($http, PARSE) {
       method: 'GET'
     });
   };
+
+  var Todos = function Todos(obj) {
+    this.title = obj.title;
+    this.description = obj.description;
+  };
+
+  this.addTodo = function (obj) {
+    var t = new Todos(obj);
+    return $http.post(url, t, PARSE.CONFIG);
+  };
 };
 TodoService.$inject = ['$http', 'PARSE'];
 
 exports['default'] = TodoService;
 module.exports = exports['default'];
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4468,7 +4506,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33373,11 +33411,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":6}]},{},[3])
+},{"./angular":7}]},{},[4])
 
 
 //# sourceMappingURL=main.js.map

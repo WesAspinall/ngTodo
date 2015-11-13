@@ -11,6 +11,16 @@ let TodoService = function($http, PARSE) {
       });
   };
 
+  let Todos = function (obj) {
+    this.title = obj.title;
+    this.description = obj.description;
+  };
+
+   this.addTodo = function (obj) {
+    let t = new Todos(obj);
+    return $http.post(url, t, PARSE.CONFIG);
+  };
+
 };
 TodoService.$inject = ['$http', 'PARSE'];
 

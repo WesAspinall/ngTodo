@@ -2,6 +2,7 @@ import angular from 'angular';
 import 'angular-ui-router';
 import config from './config';
 import ListController from './controllers/list.controller';
+import AddController from './controllers/add.controller';
 import TodoService from './services/todo.service.js';
 angular
 .module('app', ['ui.router'])
@@ -16,4 +17,5 @@ angular
 })
 .config(config)
 .controller('ListController', ListController)
+.controller('AddController', AddController)
 .service('TodoService', TodoService);
