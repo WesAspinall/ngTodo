@@ -61,20 +61,30 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var EditController = function EditController($scope, $stateParams, TodoService) {
+var EditTodoController = function EditTodoController($scope, $stateParams, TodoService, $state) {
 
-  TodoService.getTodos($stateParams.whiskeyId).then(function (res) {
+  TodoService.getTodo($stateParams.objectId).then(function (res) {
     $scope.singleTodo = res.data;
   });
 
   $scope.editTodo = function (obj) {
     TodoService.editTodo(obj).then(function (res) {
+
+      state.go('root.list');
+    });
+  };
+
+  $scope['delete'] = function (obj) {
+    alert("deleted!");
+    TodoService['delete'](obj).then(function (res) {
       console.log(res);
+      $state.go('root.list');
     });
   };
 };
-EditController.$inject = ['$scope', '$stateParams', 'TodoService'];
-exports['default'] = EditController;
+
+EditTodoController.$inject = ['$scope', '$stateParams', 'TodoService', $state];
+exports['default'] = EditTodoController;
 module.exports = exports['default'];
 
 },{}],4:[function(require,module,exports){
@@ -101,12 +111,20 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var SingleTodoController = function SingleTodoController($scope, $stateParams, TodoService) {
+var SingleTodoController = function SingleTodoController($scope, $stateParams, TodoService, $state) {
 
   TodoService.getTodo($stateParams.objectId).then(function (res) {
     $scope.singleTodo = res.data;
   });
+
+  $scope.deleteMe = function (obj) {
+    TodoService['delete'](obj).then(function (res) {
+      console.log(res);
+      $state.go('root.list');
+    });
+  };
 };
+
 SingleTodoController.$inject = ['$scope', '$stateParams', 'TodoService'];
 exports['default'] = SingleTodoController;
 module.exports = exports['default'];
@@ -170,7 +188,8 @@ var TodoService = function TodoService($http, PARSE) {
     return $http({
       url: url,
       headers: PARSE.CONFIG.headers,
-      method: 'GET'
+      method: 'GET',
+      cache: true
     });
   };
 
@@ -195,6 +214,10 @@ var TodoService = function TodoService($http, PARSE) {
 
   this.editTodo = function (obj) {
     return $http.put(url + '/' + obj.objectId, obj, PARSE.CONFIG);
+  };
+
+  this['delete'] = function (obj) {
+    return $http['delete'](url + '/' + obj.objectId, PARSE.CONFIG);
   };
 };
 TodoService.$inject = ['$http', 'PARSE'];

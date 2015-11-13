@@ -1,16 +1,26 @@
-let EditController = function($scope, $stateParams, TodoService) {
+let EditTodoController = function($scope, $stateParams, TodoService, $state) {
   
-TodoService.getTodos($stateParams.whiskeyId).then( (res) => {
+  TodoService.getTodo($stateParams.objectId).then( (res) => {
     $scope.singleTodo = res.data;
   });
 
   $scope.editTodo = function (obj) {
     TodoService.editTodo(obj).then( (res) => {
-      console.log(res);
+
+      state.go('root.list');
     });
   };
-  
+
+  $scope.delete = function (obj) {
+    alert("deleted!")
+    TodoService.delete(obj).then( (res) => {
+      console.log(res);
+      $state.go('root.list');
+    });
+  };
+
 
 };
-EditController.$inject = ['$scope', '$stateParams', 'TodoService'];
-export default EditController;
+
+EditTodoController.$inject = ['$scope', '$stateParams', 'TodoService', $state];
+export default EditTodoController;

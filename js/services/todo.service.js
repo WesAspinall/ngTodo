@@ -8,6 +8,7 @@ let TodoService = function($http, PARSE) {
         url: url,
         headers: PARSE.CONFIG.headers,
         method: 'GET',
+        cache: true
       });
   };
 
@@ -34,7 +35,9 @@ let TodoService = function($http, PARSE) {
     return $http.put(url + '/' + obj.objectId, obj, PARSE.CONFIG);
   };
 
-  
+   this.delete = function (obj) {
+    return $http.delete(url + '/' + obj.objectId, PARSE.CONFIG);
+  };
 
 };
 TodoService.$inject = ['$http', 'PARSE'];

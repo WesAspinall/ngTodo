@@ -1,14 +1,21 @@
-<div>edit</div>
-  <ul>
-<li><img src="{{singleTodo.pic}}"></li>
+<a href="#/home/"> 
+  <button>back</button> 
+</a>
 
-  <li>{{singleTodo}}</li>
-  </ul>
+<div>
+  {{singleTodo.name}}
+  <img src="{{singleTodo.pic}}">
 </div>
 
-<form ng-submit="editTodo(singleTodo)">
-  <input ng-model="singleTodo.pic" placeholder="{{singleTodo.pic}}">
-  <input ng-model="singleTodo.bio">
-  <input ng-model="singleTodo.name">
-  <button></button>
-<form>
+<form ng-submit="editTodo(singleTodo)"
+class="editFormContainer">
+
+  <input placeholder="{{singleTodo.pic}}" ng-model="singleTodo.pic">
+
+  <input placeholder="{{singleTodo.name}}" ng-model="singleTodo.name">
+  <input placeholder="{{singleTodo.bio}}" ng-model="singleTodo.bio">
+
+  <button>save</button>
+</form>
+
+<button ng-click="delete(singleTodo)">delete me</button>
