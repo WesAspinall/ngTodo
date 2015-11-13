@@ -41,16 +41,17 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var AddController = function AddController($scope, TodoService) {
+var AddController = function AddController($scope, TodoService, $state) {
 
   $scope.addTodo = function (obj) {
     TodoService.addTodo(obj).then(function (res) {
       $scope.todo = {};
+      $state.go('root.list');
     });
   };
 };
 
-AddController.$inject = ['$scope', 'TodoService'];
+AddController.$inject = ['$scope', 'TodoService', '$state'];
 
 exports['default'] = AddController;
 module.exports = exports['default'];
@@ -69,7 +70,6 @@ var EditTodoController = function EditTodoController($scope, $stateParams, TodoS
 
   $scope.editTodo = function (obj) {
     TodoService.editTodo(obj).then(function (res) {
-
       state.go('root.list');
     });
   };
@@ -83,7 +83,7 @@ var EditTodoController = function EditTodoController($scope, $stateParams, TodoS
   };
 };
 
-EditTodoController.$inject = ['$scope', '$stateParams', 'TodoService', $state];
+EditTodoController.$inject = ['$scope', '$stateParams', 'TodoService', '$state'];
 exports['default'] = EditTodoController;
 module.exports = exports['default'];
 
@@ -202,13 +202,14 @@ var TodoService = function TodoService($http, PARSE) {
     });
   };
 
-  var Todos = function Todos(obj) {
-    this.title = obj.title;
-    this.description = obj.description;
+  var Todo = function Todo(obj) {
+    this.name = obj.name;
+    this.bio = obj.bio;
+    this.pic = obj.pic;
   };
 
   this.addTodo = function (obj) {
-    var t = new Todos(obj);
+    var t = new Todo(obj);
     return $http.post(url, t, PARSE.CONFIG);
   };
 

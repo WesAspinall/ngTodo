@@ -21,13 +21,14 @@ let TodoService = function($http, PARSE) {
       });
   };
 
-  let Todos = function (obj) {
-    this.title = obj.title;
-    this.description = obj.description;
+  let Todo = function (obj) {
+    this.name = obj.name;
+    this.bio = obj.bio;
+    this.pic =obj.pic;
   };
 
    this.addTodo = function (obj) {
-    let t = new Todos(obj);
+    let t = new Todo(obj);
     return $http.post(url, t, PARSE.CONFIG);
   };
 

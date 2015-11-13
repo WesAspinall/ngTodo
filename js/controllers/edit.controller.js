@@ -6,7 +6,6 @@ let EditTodoController = function($scope, $stateParams, TodoService, $state) {
 
   $scope.editTodo = function (obj) {
     TodoService.editTodo(obj).then( (res) => {
-
       state.go('root.list');
     });
   };
@@ -22,5 +21,5 @@ let EditTodoController = function($scope, $stateParams, TodoService, $state) {
 
 };
 
-EditTodoController.$inject = ['$scope', '$stateParams', 'TodoService', $state];
+EditTodoController.$inject = ['$scope', '$stateParams', 'TodoService', '$state'];
 export default EditTodoController;
