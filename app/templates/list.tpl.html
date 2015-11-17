@@ -2,11 +2,11 @@
 
 
 <div>
-  <a href="#/single/{{pizza.objectId}}">
-    <ul ng-repeat="pizza in todos">
+  <ul ng-repeat="pizza in todos">
+    <a href="#/single/{{pizza.objectId}}">
       <li><img ng-src="{{pizza.pic}}"></li>
       <li>{{pizza.name}}</li>
       <li>{{pizza.bio}}<li>
-    </ul>
-  </a>
+    </a>
+  </ul>
 </div>
