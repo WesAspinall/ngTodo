@@ -44,6 +44,7 @@ Object.defineProperty(exports, '__esModule', {
 var AddController = function AddController($scope, TodoService, $state) {
 
   $scope.addTodo = function (obj) {
+    alert("thanks!");
     TodoService.addTodo(obj).then(function (res) {
       $scope.todo = {};
       $state.go('root.list');
@@ -57,9 +58,9 @@ exports['default'] = AddController;
 module.exports = exports['default'];
 
 },{}],3:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var EditTodoController = function EditTodoController($scope, $stateParams, TodoService, $state) {
@@ -69,14 +70,15 @@ var EditTodoController = function EditTodoController($scope, $stateParams, TodoS
   });
 
   $scope.editTodo = function (obj) {
+    alert("saved!");
     TodoService.editTodo(obj).then(function (res) {
-      state.go('root.list');
+      $state.go('root.list');
     });
   };
 
-  $scope['delete'] = function (obj) {
+  $scope["delete"] = function (obj) {
     alert("deleted!");
-    TodoService['delete'](obj).then(function (res) {
+    TodoService["delete"](obj).then(function (res) {
       console.log(res);
       $state.go('root.list');
     });
@@ -84,8 +86,8 @@ var EditTodoController = function EditTodoController($scope, $stateParams, TodoS
 };
 
 EditTodoController.$inject = ['$scope', '$stateParams', 'TodoService', '$state'];
-exports['default'] = EditTodoController;
-module.exports = exports['default'];
+exports["default"] = EditTodoController;
+module.exports = exports["default"];
 
 },{}],4:[function(require,module,exports){
 'use strict';

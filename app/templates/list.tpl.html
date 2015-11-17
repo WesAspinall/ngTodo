@@ -1,12 +1,13 @@
-<h3>People List</h3>
+<h3 class="listTitle">da list</h3>
 
-
-<div>
-  <ul class="small-block-grid-3" ng-repeat="pizza in todos">
-    <a href="#/single/{{pizza.objectId}}">
-      <li><img ng-src="{{pizza.pic}}"></li>
-      <li>{{pizza.name}}</li>
-      <li>{{pizza.bio}}<li>
+<div class="listContainer">
+  <div ng-repeat="pizza in todos" class="listBox">
+   <a href="#/single/{{pizza.objectId}}">
+      <ul class="shit">
+        <li><img ng-src="{{pizza.pic}}"></li>
+        <li>{{pizza.name}}</li>
+        <li>{{pizza.bio}}</li>
+      </ul>
     </a>
-  </ul>
+  </div>
 </div>

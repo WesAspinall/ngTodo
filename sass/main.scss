@@ -4,23 +4,65 @@
 @import 'font-awesome';
 
 body {
-  background: #e2ebf3;
+  background: white;
+  font-family: 'courier';
 }
 ul{
   list-style: none;
+}
+
+.top-bar{
+  overflow: hidden;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-U5vjw7U43cpJ2FNUkWPky_sMCsBW5u9Qhle2fNgvngeCc18');
+}
+
+.top-bar-section li:not(.has-form) a:not(.button) {
+  border-radius: 20px;
+  background-color: gray;
+}
+
+
+.top-bar-section ul{
+  background-color: white;
+}
+
+.fa-home{
+  margin-top: 10px;
 }
 
 img{
   width: 150px;
   height: 150px;
   border-radius: 20px;
+  box-shadow: 2px 2px 2px gray;
 }
 
-.small-block-grid-3{
+h1, .listTitle{
+  font-family: 'courier';
+}
+
+.listTitle{
+  text-align: center;
+  transition: all 1s ease;
+}
+.listTitle:hover{
+  color: #FF608B;
+  font-weight: bold;
+}
+.listContainer{
+  margin: 0 5%;
+}
+.listBox{
+  width: 200px;
+  margin: 10px;
   display: inline-block;
-    li{
-      width: 400px;
-      text-align: center;
-      overflow: hidden;
-    }
+  vertical-align: top;
+  word-wrap: break-word;
+}
+.enterInfo{
+  text-align: center;
+}
+.addForm{
+  width: 500px;
+  margin: 0 auto;
 }
