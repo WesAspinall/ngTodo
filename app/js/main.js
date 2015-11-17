@@ -97,6 +97,8 @@ var ListController = function ListController($scope, TodoService) {
 
   TodoService.getTodos().then(function (res) {
     $scope.todos = res.data.results;
+
+    console.log(res.data.results);
   });
 };
 
@@ -125,7 +127,7 @@ var SingleTodoController = function SingleTodoController($scope, $stateParams, T
   };
 };
 
-SingleTodoController.$inject = ['$scope', '$stateParams', 'TodoService'];
+SingleTodoController.$inject = ['$scope', '$stateParams', 'TodoService', '$state'];
 exports['default'] = SingleTodoController;
 module.exports = exports['default'];
 
@@ -184,6 +186,7 @@ var TodoService = function TodoService($http, PARSE) {
 
   var url = PARSE.URL + 'classes/todos';
 
+  // Get todo list function
   this.getTodos = function () {
     return $http({
       url: url,
@@ -193,6 +196,7 @@ var TodoService = function TodoService($http, PARSE) {
     });
   };
 
+  // Get single todo function
   this.getTodo = function (objectId) {
     return $http({
       method: 'GET',
@@ -202,25 +206,31 @@ var TodoService = function TodoService($http, PARSE) {
     });
   };
 
+  // Todo Constructor
   var Todo = function Todo(obj) {
     this.name = obj.name;
     this.bio = obj.bio;
     this.pic = obj.pic;
   };
 
+  // Add Function
   this.addTodo = function (obj) {
     var t = new Todo(obj);
     return $http.post(url, t, PARSE.CONFIG);
   };
 
+  // Edit Function
   this.editTodo = function (obj) {
     return $http.put(url + '/' + obj.objectId, obj, PARSE.CONFIG);
   };
 
+  // Delete Function
   this['delete'] = function (obj) {
     return $http['delete'](url + '/' + obj.objectId, PARSE.CONFIG);
   };
 };
+
+// Dependency injection
 TodoService.$inject = ['$http', 'PARSE'];
 
 exports['default'] = TodoService;

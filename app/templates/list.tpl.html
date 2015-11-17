@@ -1,13 +1,12 @@
-<h3>hello</h3>
+<h3>People List</h3>
 
 
-<div ng-repeat="pizza in todos">
-  <ul>
-
-  <li><a href="#/single/{{pizza.objectId}}">
-  <img src="{{pizza.pic}}"</li>
-
-  <li>{{pizza.name}}</li></a>
-  <li>{{pizza.bio}}<li></a>
-  </ul>
+<div>
+  <a href="#/single/{{pizza.objectId}}">
+    <ul ng-repeat="pizza in todos">
+      <li><img ng-src="{{pizza.pic}}"></li>
+      <li>{{pizza.name}}</li>
+      <li>{{pizza.bio}}<li>
+    </ul>
+  </a>
 </div>

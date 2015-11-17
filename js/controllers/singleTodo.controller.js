@@ -1,4 +1,4 @@
-let SingleTodoController = function($scope, $stateParams, TodoService, $state) {
+let SingleTodoController = function($scope, $stateParams, TodoService, $state,) {
   
   TodoService.getTodo($stateParams.objectId).then( (res) => {
     $scope.singleTodo = res.data;
@@ -12,5 +12,5 @@ let SingleTodoController = function($scope, $stateParams, TodoService, $state) {
   };
 };
 
-SingleTodoController.$inject = ['$scope', '$stateParams', 'TodoService'];
+SingleTodoController.$inject = ['$scope', '$stateParams', 'TodoService', '$state'];
 export default SingleTodoController;
