@@ -8418,4 +8418,11 @@ img {
   height: 150px;
   border-radius: 20px; }
 
+.small-block-grid-3 {
+  display: inline-block; }
+  .small-block-grid-3 li {
+    width: 400px;
+    text-align: center;
+    overflow: hidden; }
+
 /*# sourceMappingURL=main.css.map */
